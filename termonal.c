@@ -23,7 +23,7 @@ int main() {
     intro();
     
     // COLOQUE AQUI A PALAVRA SECRETA (ENTRE AS ASPAS)
-    char palavra[6] = "rumen";
+    char palavra[6] = "mesto";
 
     // SE FOR JOGAR COM MAIS DE UMA PALAVRA, COLOQUE AS OUTRAS PALAVRAS AQUI AQUI (ENTRE ASPAS)
     // PARA DUETO (PREENCHA A PALAVRA ANTERIOR TAMBÉM)
@@ -138,24 +138,28 @@ int verifica_palavra(char * tentativa, char * palavra) {
 
 // Uma palavra
 int termo(char * palavra) {
-    char tentativa[6];
+    printf("\nNo termo, você tem 6 tentativas para acertar uma palavra. Boa sorte!\n");
+    printf("Escreva sua primeira palavra:\n");
+    char tentativa[6][6];
     int i;
     for(i=0;i<QUANTIDADE_TENTATIVAS_TERMO;i++)
     {
-        scanf("%s", tentativa);
-        if(verifica_palavra(tentativa, palavra) == ACERTOU)
+        scanf("%s", tentativa[i]);
+        if(verifica_palavra(tentativa[i], palavra) == ACERTOU)
         {
             printf("\033[1;32m%s\033[m", palavra);
             printf("\n");
             return i;
         }
-        printf("\n");
+        printf(" %d tentativas restantes!\n", 5-i);
     }
     return PERDEU;
 }
 
 // Duas palavras
 int dueto(char * palavra1, char * palavra2) {
+    printf("\nNo dueto, você tem 7 tentativas para acertar duas palavras. Boa sorte!\n");
+    printf("Escreva sua primeira palavra:\n");
     int resultado1, resultado2;
     int i;
     int first = 0, second = 0;
@@ -163,9 +167,10 @@ int dueto(char * palavra1, char * palavra2) {
     for(i=0;i<QUANTIDADE_TENTATIVAS_DUETO;i++)
     {
         scanf("%s", tentativa);
-        resultado1 = verifica_palavra(tentativa, palavra1);
+
         if(first == 0)
         {
+            resultado1 = verifica_palavra(tentativa, palavra1);
             if(resultado1 == ACERTOU)
             {
                 printf("\033[1;32m%s\033[m", palavra1);
@@ -174,9 +179,9 @@ int dueto(char * palavra1, char * palavra2) {
         }
         else printf("     ");
         printf(" ");
-        resultado2 = verifica_palavra(tentativa, palavra2);
         if(second == 0)
         {
+            resultado2 = verifica_palavra(tentativa, palavra2);
             if(resultado2 == ACERTOU)
             {
                 printf("\033[1;32m%s\033[m", palavra2);
@@ -185,8 +190,9 @@ int dueto(char * palavra1, char * palavra2) {
         }
         else printf("     ");
         printf("\n");
+        if(first == 1 && second == 1) return i;
     }
-    return 0;
+    return ERROU;
 }
 
 // Quatro palavras

@@ -138,7 +138,7 @@ int verifica_palavra(char * tentativa, char * palavra) {
 
 // Uma palavra
 int termo(char * palavra) {
-    printf("\nNo termo, você tem 6 tentativas para acertar uma palavra. Boa sorte!\n");
+    printf("\nNo termo, você tem 6 tentativas para acertar uma palavra. Boa sorte!\n\n");
     printf("Escreva sua primeira palavra:\n");
     char tentativa[6][6];
     int i;
@@ -158,12 +158,14 @@ int termo(char * palavra) {
 
 // Duas palavras
 int dueto(char * palavra1, char * palavra2) {
-    printf("\nNo dueto, você tem 7 tentativas para acertar duas palavras. Boa sorte!\n");
+    printf("\nNo dueto, você tem 7 tentativas para acertar duas palavras. Boa sorte!\n\n");
     printf("Escreva sua primeira palavra:\n");
     int resultado1, resultado2;
-    int i;
-    int first = 0, second = 0;
+    int first, second;
+    first = second = 0;
+
     char tentativa[6];
+    int i;
     for(i=0;i<QUANTIDADE_TENTATIVAS_DUETO;i++)
     {
         scanf("%s", tentativa);
@@ -192,24 +194,68 @@ int dueto(char * palavra1, char * palavra2) {
         printf("\n");
         if(first == 1 && second == 1) return i;
     }
-    return ERROU;
+    return PERDEU;
 }
 
 // Quatro palavras
 int quarteto(char * palavra1, char * palavra2, char * palavra3, char * palavra4) {
-    char tentativa1[6];
-    char tentativa2[6];
-    char tentativa3[6];
-    char tentativa4[6];
+    char tentativa[6];
+    int first, second, third, fourth;
+    first = second = third = fourth = 0;
+    printf("\nNo quarteto, você tem 8 tentativas para acertar quatro palavras. Boa sorte!\n\n");
+    printf("Escreva sua primeira palavra:\n");
+
+    int resultado1, resultado2, resultado3, resultado4;
     int i;
     for(i=0;i<QUANTIDADE_TENTATIVAS_QUARTETO;i++)
     {
-        scanf("%s", tentativa1);
-        scanf("%s", tentativa2);
-        scanf("%s", tentativa3);
-        scanf("%s", tentativa4);
-        if(verifica_palavra(tentativa1, palavra1) == ACERTOU && verifica_palavra(tentativa2, palavra2) == ACERTOU && verifica_palavra(tentativa3, palavra3) == ACERTOU && verifica_palavra(tentativa4, palavra4) == ACERTOU) return i;
+        scanf("%s", tentativa);
+
+        if(first == 0)
+        {
+            resultado1 = verifica_palavra(tentativa, palavra1);
+            if(resultado1 == ACERTOU)
+            {
+                printf("\033[1;32m%s\033[m", palavra1);
+                first = 1;
+            }
+        }
+        else printf("     ");
+        printf(" ");
+        if(second == 0)
+        {
+            resultado2 = verifica_palavra(tentativa, palavra2);
+            if(resultado2 == ACERTOU)
+            {
+                printf("\033[1;32m%s\033[m", palavra2);
+                second = 1;
+            }
+        }
+        else printf("     ");
+        printf(" ");
+        if(third == 0)
+        {
+            resultado3 = verifica_palavra(tentativa, palavra3);
+            if(resultado3 == ACERTOU)
+            {
+                printf("\033[1;32m%s\033[m", palavra3);
+                third = 1;
+            }
+        }
+        else printf("     ");
+        printf(" ");
+        if(fourth == 0)
+        {
+            resultado4 = verifica_palavra(tentativa, palavra4);
+            if(resultado4 == ACERTOU)
+            {
+                printf("\033[1;32m%s\033[m", palavra4);
+                fourth = 1;
+            }
+        }
+        else printf("     ");
+        printf("\n");
+        if(first == 1 && second == 1 && third == 1 && fourth == 1) return i;
     }
-    if(i == 8) return PERDEU;
-    return 0;
+    return PERDEU;
 }

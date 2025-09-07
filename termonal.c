@@ -107,30 +107,48 @@ int verifica_palavra(char * tentativa, char * palavra) {
         return ACERTOU;
     }
 
-    // Primeira letra
-    if(tentativa[0] == palavra[0]) printf("\033[1;32m%c\033[m", tentativa[0]);
-    else if(tentativa[0] == palavra[1] || tentativa[0] == palavra[2] || tentativa[0] == palavra[3] || tentativa[0] == palavra[4]) printf("\033[1;33m%c\033[m", tentativa[0]);
-    else printf("\033[1;31m%c\033[m", tentativa[0]);
+    // Verifica cada letra
+    for(int i=0;i<5;i++)
+    {
+        if(tentativa[i] == palavra[i]) printf("\033[1;32m%c\033[m", tentativa[i]);
+        else
+        {
+            for(int j=0;j<5;j++)
+            {
+                if(tentativa[i] == palavra[j])
+                {
+                    printf("\033[1;33m%c\033[m", tentativa[i]);
+                    break;
+                }
+                if(j == 4) printf("\033[1;31m%c\033[m", tentativa[i]);
+            }
+        }
+    }
 
-    // Segunda letra
-    if(tentativa[1] == palavra[1]) printf("\033[1;32m%c\033[m", tentativa[1]);
-    else if(tentativa[1] == palavra[0] || tentativa[1] == palavra[2] || tentativa[1] == palavra[3] || tentativa[1] == palavra[4]) printf("\033[1;33m%c\033[m", tentativa[1]);
-    else printf("\033[1;31m%c\033[m", tentativa[1]);
+    // // Primeira letra
+    // if(tentativa[0] == palavra[0]) printf("\033[1;32m%c\033[m", tentativa[0]);
+    // else if(tentativa[0] == palavra[1] || tentativa[0] == palavra[2] || tentativa[0] == palavra[3] || tentativa[0] == palavra[4]) printf("\033[1;33m%c\033[m", tentativa[0]);
+    // else printf("\033[1;31m%c\033[m", tentativa[0]);
 
-    // Terceira letra
-    if(tentativa[2] == palavra[2]) printf("\033[1;32m%c\033[m", tentativa[2]);
-    else if(tentativa[2] == palavra[0] || tentativa[2] == palavra[1] || tentativa[2] == palavra[3] || tentativa[2] == palavra[4]) printf("\033[1;33m%c\033[m", tentativa[2]);
-    else printf("\033[1;31m%c\033[m", tentativa[2]);
+    // // Segunda letra
+    // if(tentativa[1] == palavra[1]) printf("\033[1;32m%c\033[m", tentativa[1]);
+    // else if(tentativa[1] == palavra[0] || tentativa[1] == palavra[2] || tentativa[1] == palavra[3] || tentativa[1] == palavra[4]) printf("\033[1;33m%c\033[m", tentativa[1]);
+    // else printf("\033[1;31m%c\033[m", tentativa[1]);
 
-    // Quarta letra
-    if(tentativa[3] == palavra[3]) printf("\033[1;32m%c\033[m", tentativa[3]);
-    else if(tentativa[3] == palavra[0] || tentativa[3] == palavra[1] || tentativa[3] == palavra[2] || tentativa[3] == palavra[4]) printf("\033[1;33m%c\033[m", tentativa[3]);
-    else printf("\033[1;31m%c\033[m", tentativa[3]);
+    // // Terceira letra
+    // if(tentativa[2] == palavra[2]) printf("\033[1;32m%c\033[m", tentativa[2]);
+    // else if(tentativa[2] == palavra[0] || tentativa[2] == palavra[1] || tentativa[2] == palavra[3] || tentativa[2] == palavra[4]) printf("\033[1;33m%c\033[m", tentativa[2]);
+    // else printf("\033[1;31m%c\033[m", tentativa[2]);
 
-    // Quinta letra
-    if(tentativa[4] == palavra[4]) printf("\033[1;32m%c\033[m", tentativa[4]);
-    else if(tentativa[4] == palavra[0] || tentativa[4] == palavra[1] || tentativa[4] == palavra[2] || tentativa[4] == palavra[3]) printf("\033[1;33m%c\033[m", tentativa[4]);
-    else printf("\033[1;31m%c\033[m", tentativa[4]);
+    // // Quarta letra
+    // if(tentativa[3] == palavra[3]) printf("\033[1;32m%c\033[m", tentativa[3]);
+    // else if(tentativa[3] == palavra[0] || tentativa[3] == palavra[1] || tentativa[3] == palavra[2] || tentativa[3] == palavra[4]) printf("\033[1;33m%c\033[m", tentativa[3]);
+    // else printf("\033[1;31m%c\033[m", tentativa[3]);
+
+    // // Quinta letra
+    // if(tentativa[4] == palavra[4]) printf("\033[1;32m%c\033[m", tentativa[4]);
+    // else if(tentativa[4] == palavra[0] || tentativa[4] == palavra[1] || tentativa[4] == palavra[2] || tentativa[4] == palavra[3]) printf("\033[1;33m%c\033[m", tentativa[4]);
+    // else printf("\033[1;31m%c\033[m", tentativa[4]);
 
     return ERROU;
 }
